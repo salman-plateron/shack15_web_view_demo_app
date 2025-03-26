@@ -109,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       mobileNumber: _mobileController.text,
                       userName: _usernameController.text,
                       webUrl:
-                          'https://qa.onlineorders.novatab.com/#/menu/71b2f49c-bf91-40eb-87cf-5402581e1b21?orderType=&source=embeddedView',
+                          'https://qa.onlineorders.novatab.com/#/menu/71b2f49c-bf91-40eb-87cf-5402581e1b21?orderType=&viewType=embeddedView',
                     ),
                   );
                 },
@@ -146,7 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       mobileNumber: _mobileController.text,
                       userName: _usernameController.text,
                       webUrl:
-                          'https://qa.onlineorders.novatab.com/#/orderList/71b2f49c-bf91-40eb-87cf-5402581e1b21?orderType=&source=embeddedView',
+                          'https://qa.onlineorders.novatab.com/#/orderList/71b2f49c-bf91-40eb-87cf-5402581e1b21?orderType=&viewType=embeddedView',
                     ),
                   );
                 },
