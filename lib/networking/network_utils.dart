@@ -41,7 +41,7 @@ class _NetworkApiService implements AbstractApiRepository {
 
     try {
       final response = await dio.get(
-        'https://qa03.as1.dev.bakeit360.com/unified/user-account-microservice/api/Sessions',
+        'https://qa01.as1.dev.bakeit360.com/unified/user-account-microservice/api/Sessions',
         options: Options(
           method: 'GET',
           contentType: 'application/json',
@@ -74,7 +74,7 @@ class _NetworkApiService implements AbstractApiRepository {
     commonHeaders.putIfAbsent('authorization', () => 'Bearer $sessionToken');
     try {
       final response = await dio.post(
-        'https://qa03.as1.dev.bakeit360.com/unified/user-account-microservice/api/Shack15/Accounts/userAuth',
+        'https://qa01.as1.dev.bakeit360.com/unified/user-account-microservice/api/Shack15/Accounts/userAuth',
         data: {
           "mobileNumber": mobileNumber,
           "firstName": userName,
