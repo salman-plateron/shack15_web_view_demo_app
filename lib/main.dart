@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shack15_web_view_demo/bloc/user_auth_bloc.dart';
 import 'package:shack15_web_view_demo/login_screen.dart';
-
-import 'webview_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,11 +18,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: BlocProvider(
-        create: (context) => UserAuthBloc(),
-        child: const MyHomePage(
-          title: 'SHACK 15 Testing Demo',
-        ),
+      home: const MyHomePage(
+        title: 'SHACK 15 Testing Demo',
       ),
     );
   }
@@ -68,30 +61,12 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         child: Center(
-          child: BlocListener<UserAuthBloc, UserAuthState>(
-            bloc: BlocProvider.of<UserAuthBloc>(context),
-            listener: (context, state) {
-              if (state is UserAuthSuccessState) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => WebViewPage(
-                      authtoken: state.data['token'],
-                      userRefid: state.data['refId'],
-                      sessionToken: state.sessionToken,
-                      webUrl: state.webUrl,
-                    ),
-                  ),
-                );
-              }
-            },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                LoginScreen(),
-                const SizedBox(height: 20),
-              ],
-            ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              LoginScreen(),
+              const SizedBox(height: 20),
+            ],
           ),
         ),
       ),
