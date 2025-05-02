@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shack15_web_view_demo/bloc/user_auth_bloc.dart';
+import 'package:shack15_web_view_demo/webview_page.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -12,17 +11,14 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _mobileController = TextEditingController();
-  UserAuthBloc? _userAuthBloc;
 
   @override
   void initState() {
-    _userAuthBloc = BlocProvider.of<UserAuthBloc>(context);
     super.initState();
   }
 
   @override
   void dispose() {
-    _userAuthBloc?.close();
     _usernameController.dispose();
     _mobileController.dispose();
     super.dispose();
@@ -104,12 +100,16 @@ class _LoginScreenState extends State<LoginScreen> {
                     );
                     return;
                   }
-                  _userAuthBloc?.add(
-                    UserLogInEvent(
-                      mobileNumber: _mobileController.text,
-                      userName: _usernameController.text,
-                      webUrl:
-                          'https://qa.onlineorders.novatab.com/#/menu/71b2f49c-bf91-40eb-87cf-5402581e1b21?orderType=&viewType=embeddedView',
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => WebViewPage(
+                        authtoken: "state.data['token']",
+                        userRefid: "state.data['refId']",
+                        sessionToken: "state.sessionToken",
+                        webUrl:
+                            'https://qa.onlineorders.novatab.com/#/menu/71b2f49c-bf91-40eb-87cf-5402581e1b21?orderType=&viewType=embeddedView&mobile=${_mobileController.text}&name=${_usernameController.text}',
+                      ),
                     ),
                   );
                 },
@@ -141,17 +141,62 @@ class _LoginScreenState extends State<LoginScreen> {
                     );
                     return;
                   }
-                  _userAuthBloc?.add(
-                    UserLogInEvent(
-                      mobileNumber: _mobileController.text,
-                      userName: _usernameController.text,
-                      webUrl:
-                          'https://qa.onlineorders.novatab.com/#/orderList/71b2f49c-bf91-40eb-87cf-5402581e1b21?orderType=&viewType=embeddedView',
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => WebViewPage(
+                        authtoken: "state.data['token']",
+                        userRefid: "state.data['refId']",
+                        sessionToken: "state.sessionToken",
+                        webUrl:
+                            'https://qa.onlineorders.novatab.com/#/orderList/71b2f49c-bf91-40eb-87cf-5402581e1b21?orderType=&viewType=embeddedView&mobile=${_mobileController.text}&name=${_usernameController.text}',
+                      ),
                     ),
                   );
                 },
                 child: const Text(
                   "Order List",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 15),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  backgroundColor: Colors.white,
+                  foregroundColor: Color(0xFF1E3C72),
+                  elevation: 5,
+                ),
+                onPressed: () {
+                  if (_mobileController.text.length != 10) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("Mobile number must be 10 digits"),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                    return;
+                  }
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => WebViewPage(
+                        authtoken: "state.data['token']",
+                        userRefid: "state.data['refId']",
+                        sessionToken: "state.sessionToken",
+                        webUrl:
+                            "https://qa.onlineorders.novatab.com/#/cart/71b2f49c-bf91-40eb-87cf-5402581e1b21?repatOrder=115cdf10-8760-4d8b-be74-b4cf0a1b9c37&viewType=embeddedView&mobile=${_mobileController.text}&name=${_usernameController.text}",
+                      ),
+                    ),
+                  );
+                },
+                child: const Text(
+                  "Repeat the order",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ),

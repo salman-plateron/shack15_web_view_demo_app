@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
-import 'package:shack15_web_view_demo/user_agent.dart';
 
 // Abstract API Repository
 abstract class AbstractApiRepository {
@@ -26,7 +25,7 @@ class _NetworkApiService implements AbstractApiRepository {
 
   @override
   Future<String> getSessionToken() async {
-    userAgent = await getUserAgent();
+    userAgent = "";
     Map<String, String> sessionHeader = {
       HttpHeaders.userAgentHeader: userAgent,
     };

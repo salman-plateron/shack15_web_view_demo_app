@@ -5,7 +5,9 @@ import 'package:shack15_web_view_demo/login_screen.dart';
 
 import 'webview_page.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(const MyApp());
 }
 
